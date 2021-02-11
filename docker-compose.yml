@@ -1,0 +1,18 @@
+version: "3.6"
+configs:
+  www_file:
+    file: ./index.html
+services:
+  nginx:
+     image: nginx:1.19.6
+     ports:
+       - '7777:80'
+     volumes:
+       - ./index.html:/usr/share/nginx/html/index.html
+  redis:
+     image: redis:6.2-rc3
+  postgres:
+     image: postgres:9.6.20
+     environment:
+         - POSTGRES_USER=user
+         - POSTGRES_PASSWORD=pass
