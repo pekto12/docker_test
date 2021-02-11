@@ -1,0 +1,42 @@
+- hosts: all
+  tasks:
+
+    - name: install docker-compose
+      become: true
+      apt:
+        name: docker-compose
+
+    - name: install docker
+      become: true
+      apt:
+        name: docker
+
+    - name: install docker.io
+      become: true
+      apt:
+        name: docker.io
+    - name: install git
+      become: true
+      apt:
+        name: git
+    - git:
+        repo: https://github.com/pekto12/docker_test.git
+        dest: /home/pekto/docker
+    - name: cp
+      become: true
+      shell:
+        cmd: "cp docker/index.html ./"
+        cmd: "cp docker/docker-compose.yml ./"
+    - name: cp2
+      become: true
+      shell:
+        cmd: "cp docker/index.html ./"
+    - name: docker-compose build
+      become: true
+      shell:
+        cmd: "docker-compose build"
+    - name: docker-compose up
+      become: true
+      shell:
+        cmd: "docker-compose up -d"
+
